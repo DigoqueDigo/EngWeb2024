@@ -7,7 +7,6 @@ import xml.etree.ElementTree as ET
 
 path = 'texto'
 
-
 try:
     files = [path + '/' + f for f in listdir(path) if isfile(join(path, f))]
 
@@ -34,7 +33,7 @@ for file in files:
 indexList = sorted(indexList, key = lambda x : x[0])
 
 
-with open('.base.html') as baseFile:
+with open('html/.base.html') as baseFile:
     indexFileContent = baseFile.read()
 
 
@@ -49,5 +48,5 @@ for item in indexList:
 bodyContent += '</ul>'
 indexFileContent = indexFileContent.replace('?????', bodyContent)
 
-with open('index.html', 'w') as indexFile:
+with open('html/index.html', 'w') as indexFile:
     indexFile.write(indexFileContent)
