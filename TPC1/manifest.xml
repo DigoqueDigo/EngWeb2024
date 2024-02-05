@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <title>TPC1: Exemplo</title>
+        <date>2024-02-05</date>
+        <author>
+            <id>A100897</id>
+            <name>Diogo Marques</name>
+        </author>
+        <uc>
+            <sigla>EW2024</sigla>
+            <name>Engenharia Web</name>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Primeiro parágrafo</p>
+        <p>Segundo parágrafo</p>
+        <p>Parágrafo com <url>link</url><texto>texto embutido</texto></p>
+    </resumo>
+    <resultados>
+        <resultado>Resultado 1</resultado>
+        <resultado>Resultado 2</resultado>
+    </resultados>
+</doc>
