@@ -18,24 +18,25 @@ ul{
     display: grid;
     justify-content: center;
 }
- 
+
 
 .pagination li{
     display: inline-block;
-    border: 1px solid #c7c7c7;
     margin: 10px;
-    background: #FFFFFF;
+    border-radius: 50px;
+    border: 1px solid #c7c7c7;
+    background: rgb(31, 165, 42); 
 }
 
 
 .pagination li a{
     text-decoration: none;
-    color: rgb(89, 141, 235);
+    color: white;
     display:block;
     padding: 6px 10px 6px 10px;
 }
 
 
 .pagination li:hover{
-    background: #EEE;
+    background: rgb(4, 143, 15);
 }
