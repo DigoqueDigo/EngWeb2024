@@ -13,12 +13,15 @@
         </uc>
     </meta>
     <resumo>
-        <p>Primeiro parágrafo</p>
-        <p>Segundo parágrafo</p>
-        <p>Parágrafo com <url>link</url><texto>texto embutido</texto></p>
+        <p>Este trabalho consiste em gerar uma página web a partir de vários ficheiros xml.</p>
     </resumo>
+    <objetivos>
+        <objetivo>A página inical deve possuir um índice com todas as ruas.</objetivo>
+        <objetivo>Deve ser possível navegar entre as páginas das ruas.</objetivo>
+        <objetivo>A página de uma rua deve apresentar uma breve descrição, fotos e famílias residentes.</objetivo>
+    </objetivos>
     <resultados>
-        <resultado>Resultado 1</resultado>
-        <resultado>Resultado 2</resultado>
+        <resultado>Todos os objetivos apresentados foram cumpridos</resultado>
+        <resultado>Algumas imagens não são carregadas pelo browser, apesar do path estar correto</resultado>
     </resultados>
 </doc>

@@ -58,7 +58,7 @@ img{
 
 
 .button1:hover{
-    background-color:  rgb(5, 146, 17);
+    background-color: #059460;
     color: white;
 }
 
@@ -66,4 +66,42 @@ img{
     text-decoration: none;
     color: white;
     display: block;
+}
+
+
+#tabela{
+    font-family: monospace;
+    font-size: 0.9vw;
+    border-collapse: collapse;
+    
+    width: 100%;
+}
+  
+
+#tabela td{
+    padding: 10px;
+}
+
+
+#tabela th{
+    padding: 10px;
+}
+
+
+#tabela tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+
+#tabela tr:hover{
+    background-color: #ddd;
+}
+
+
+#tabela th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(31, 165, 42); 
+    color: white;
 }

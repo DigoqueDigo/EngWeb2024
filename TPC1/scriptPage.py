@@ -20,6 +20,14 @@ def get_text_content(element):
     return text_content
 
 
+def get_value(element):
+
+    if element is not None:
+        return get_text_content(element).strip() or 'Desconhecido'
+
+    return 'Desconhecido'
+
+
 path = 'texto'
 
 try:
@@ -50,6 +58,7 @@ for file in files:
     name = tree.find('.//meta/nome')
     number = tree.find('.//meta/número')
     figures = tree.findall('.//corpo/figura')
+    houses = tree.findall('.//corpo/lista-casas/casa')
 
     pageContent = baseContent.replace('Title', f'{number.text.strip()} - {name.text.strip()}', 1)
     pageContent = pageContent.replace('PageTitle', name.text.strip(), 1)
@@ -61,7 +70,7 @@ for file in files:
     for xmlLine in tree.findall('.//corpo/para'):
         bodyContent += f'<p>{get_text_content(xmlLine)}</p>'
 
-    
+
     ## collect images and substitles
     for figure in figures:
 
@@ -74,11 +83,27 @@ for file in files:
             bodyContent += f' <div class="bottom-left">{subElement.text}</div>'
             bodyContent += '</div>'
 
-    
-    ## collect house list
-    
 
+    if len(houses) > 0:
+        bodyContent += '<table id="tabela"' \
+            '<tr>'                          \
+                '<th>Número</th>'           \
+                '<th>Enfiteuta</th>'        \
+                '<th>Vista</th>'            \
+                '<th>Foro</th>'             \
+                '<th>Descrição</th>'        \
+            '</tr>'
 
+    for house in houses:
+        bodyContent += '<tr>'                                       \
+                f'<td>{get_value(house.find("número"))}</td>'       \
+                f'<td>{get_value(house.find("enfiteuta"))}</td>'    \
+                f'<td>{get_value(house.find("vista"))}</td>'        \
+                f'<td>{get_value(house.find("foro"))}</td>'         \
+                f'<td>{get_value(house.find("desc"))}</td>'         \
+            '</tr>'
+
+    bodyContent += '</table>'
     bodyContent += '</div>'
     bodyContent += '<button class="button button1"><a href="../index.html">Voltar<a></button>'
     pageContent = pageContent.replace('BodyContent', bodyContent)
