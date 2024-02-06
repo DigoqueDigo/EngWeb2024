@@ -13,9 +13,10 @@ ul{
 
 
 .pagination{
-    padding-left: 4vw;
-    padding-right: 4vw;
-    text-align: justify;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    display: grid;
+    justify-content: center;
 }
  
 
