@@ -11,3 +11,10 @@ Este trabalho consiste em gerar uma página web a partir de vários ficheiros xm
 ## Objetivos Adicionais
 
 - Melhorar o aspeto das páginas com o auxílio de CSS.
+
+## Run
+
+```
+chmod +x run.sh
+./run.sh
+```

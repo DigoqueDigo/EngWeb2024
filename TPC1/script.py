@@ -1,2 +1,0 @@
-import scriptIndex
-import scriptPage
