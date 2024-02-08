@@ -84,6 +84,7 @@ for file in files:
             bodyContent += '</div>'
 
 
+    ## collect table information
     if len(houses) > 0:
         bodyContent += '<table id="tabela"' \
             '<tr>'                          \
