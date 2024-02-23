@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <title>TPC2: Music School Website</title>
+        <date>2024-02-23</date>
+        <author>
+            <id>A100897</id>
+            <name>Diogo Marques</name>
+        </author>
+        <uc>
+            <sigla>EW2024</sigla>
+            <name>Engenharia Web</name>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Este trabalho consiste em criar um website para uma escola de música,
+        sendo que as informações necessárias estão contidas num ficheiro .json,
+        que pode ser consultado recorrendo à REST API do json-server.</p>
+    </resumo>
+    <objetivos>
+        <objetivo>Apresentar uma listagem dos cursos, alunos e instrumentos existentes na escola.</objetivo>
+        <objetivo>Analisar detalhadamente/individualmente os cursos e alunos.</objetivo>
+        <objetivo>Proporcionar uma navegação intuitiva.</objetivo>
+    </objetivos>
+    <paginas>
+        <pagina>Página inicial: '/'</pagina>
+        <pagina>Página dos cursos: '/cursos'</pagina>
+        <pagina>Página dos alunos: '/alunos'</pagina>
+        <pagina>Página de um curso: '/cursos/curso_ID'</pagina>
+        <pagina>Página de um aluno: '/alunos/aluno_ID'</pagina>
+        <pagina>Página dos instrumentos: '/instrumentos'</pagina>
+    </paginas>
+</doc>

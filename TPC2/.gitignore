@@ -1,3 +1,3 @@
 node_modules/
-dataset.json
-package*
+package-lock.json
+db.json
