@@ -22,18 +22,13 @@ class ServerHandler{
     execute(pathname){
 
         try{
-            console.log("Pathname: " + pathname)
             this.pathname = pathname
             pathname = pathname.replace(/C.+/,'C')
             pathname = pathname.replace(/I.+/,'C')
             pathname = pathname.replace(/A.+/,'A')
-
-            console.log(pathname)
             this.map[pathname]()
         }
-        catch (error){
-            console.error(error)
-        }
+        catch (error) {console.error(error)}
     }
 
 
@@ -69,6 +64,7 @@ class ServerHandler{
             .catch(function (error){
                 console.log(error)
                 self.res.write('<h2>Página não identificada</h2>')
+                self.res.write('<button type="button"><a href="/">Página Inicial</a></button>')
                 self.res.end()
             })
     }
@@ -97,6 +93,7 @@ class ServerHandler{
             .catch(function (error){
                 console.log(error)
                 self.res.write('<h2>Página não identificada</h2>')
+                self.res.write('<button type="button"><a href="/">Página Inicial</a></button>')
                 self.res.end()
             })
     }
@@ -125,6 +122,7 @@ class ServerHandler{
             .catch(function (error){
                 console.log(error)
                 self.res.write('<h2>Página não identificada</h2>')
+                self.res.write('<button type="button"><a href="/">Página Inicial</a></button>')
                 self.res.end()
             })
     }
@@ -136,7 +134,7 @@ class ServerHandler{
 
         axios.get('http://localhost:3000/cursos?id=' + self.pathname.split('/').pop())
 
-            .then((resp) =>{
+            .then(async (resp) =>{
 
                 let course = resp.data.pop()
 
@@ -145,6 +143,13 @@ class ServerHandler{
                 self.res.write('<p><b>ID: </b>' + course.id + '</p>')
                 self.res.write('<p><b>Duração: </b>' + course.duracao + 'h</p>')
                 self.res.write('<p><b>Instrumento: </b>' + course.instrumento['#text'] + '</p>')
+
+                let students = await axios.get('http://localhost:3000/alunos?curso=' + self.pathname.split('/').pop())
+
+                self.res.write('<p><b>Alunos Inscritos</b></p><ul>')
+                students.data.forEach(element => self.res.write('<li>' + element.nome + '</li>'))
+                self.res.write('</ul>')
+
                 self.res.write('<button type="button"><a href="/cursos">Voltar</a></button>')
                 self.res.write('<button type="button"><a href="/">Página Inicial</a></button>')
                 self.res.end()
@@ -153,6 +158,7 @@ class ServerHandler{
             .catch(function (error){
                 console.log(error)
                 self.res.write('<h2>Página não identificada</h2>')
+                self.res.write('<button type="button"><a href="/">Página Inicial</a></button>')
                 self.res.end()
             })
     }
@@ -181,7 +187,8 @@ class ServerHandler{
 
             .catch(function (error){
                 console.log(error)
-                self.res.write('<h1>Página não identificada</h1>')
+                self.res.write('<h2>Página não identificada</h2>')
+                self.res.write('<button type="button"><a href="/">Página Inicial</a></button>')
                 self.res.end()
             })
     }
