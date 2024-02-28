@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <title>TPC3: American Movies Website</title>
+        <date>2024-02-28</date>
+        <author>
+            <id>A100897</id>
+            <name>Diogo Marques</name>
+        </author>
+        <uc>
+            <sigla>EW2024</sigla>
+            <name>Engenharia Web</name>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Este trabalho consiste em criar um website para um arquivo
+        de filmes americanos, sendo que as informações necessárias
+        estão contidas num ficheiro .json, que pode ser consultado
+        recorrendo à REST API do `json-server`.</p>
+    </resumo>
+    <objetivos>
+        <objetivo>Apresentar uma listagem dos filmes, atores e géneros.</objetivo>
+        <objetivo>Analisar detalhadamente os elementos mencionados.</objetivo>
+        <objetivo>Proporcionar uma navegação intuitiva.</objetivo>
+    </objetivos>
+    <paginas>
+        <pagina>Página inicial: /</pagina>
+        <pagina>Página dos filmes: /filmes</pagina>
+        <pagina>Página dos atores: /atores</pagina>
+        <pagina>Página dos géneros: /generos</pagina>
+        <pagina>Página de um filme: /filmes/filme_id</pagina>
+        <pagina>Página de um ator: /atores/ator_nome</pagina>
+        <pagina>Página de um género: /generos/genero</pagina>
+    </paginas>
+</doc>
