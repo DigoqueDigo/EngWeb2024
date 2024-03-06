@@ -33,7 +33,7 @@ class Template{
     }
 
     initialPage(){
-        
+
         return `
 <!DOCTYPE html>
 <html">
@@ -80,7 +80,12 @@ class Template{
     <body>
         <div class="w3-card-4">
             <header class="w3-container w3-teal">
-                <h1>${title}</h1>
+                <h1 style="display: flex; justify-content: space-between; align-items: center;">
+                    ${title}
+                    <a class="w3-btn w3-circle w3-grey" href="/compositores/create">
+                        <img src="person-fill-add.svg" style="width: 40px;">
+                    </a>
+                </h1>
             </header>
         </div>
         <div class="w3-container">
@@ -205,7 +210,7 @@ class Template{
             <table class="w3-table-all">
                 <tr>
                     <th>Período</th>
-                    <th>Artistas</th>
+                    <th>Compositores</th>
                     <th>Editar</th>
                     <th>Apagar</th>
                 </tr>`
@@ -259,7 +264,7 @@ class Template{
         <meta charset="UTF-8"/>
         <link rel="icon" href="favicon.ico"/>
         <link rel="stylesheet" href="w3.css"/>
-        <title>Editar - ${compositor.id}</title>
+        <title>Editar - ${compositor.nome}</title>
     </head>
     <body>
        <div class="w3-card-4">
@@ -279,6 +284,46 @@ class Template{
                 <input class="w3-input w3-round" type="date" name="dataObito" value="${compositor.dataObito}"/>
                 <label>Biografia</label>
                 <input class="w3-input w3-round" type="text" name="bio" value="${compositor.bio}"/>
+            </fieldset>
+            <button class="w3-button w3-block w3-grey" type="submit">
+                Guardar
+            </button>
+        </form>
+        <footer class="w3-container w3-teal">
+            <h5>Criado por Diogo Marques</h5>
+        </footer>
+    </body>
+</html>`
+    }
+
+    createCompositor(){
+        return `
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="favicon.ico"/>
+        <link rel="stylesheet" href="w3.css"/>
+        <title>Registo</title>
+    </head>
+    <body>
+        <div class="w3-card-4">
+            <header class="w3-container w3-teal">
+                <h1>Registar Compositor</h1>
+            </header>
+        </div>
+        <form class="w3-container" method="POST">
+            <fieldset>
+                <label>Nome</label>
+                <input class="w3-input w3-round" type="text" name="nome" placeholder="Por preecher" required/>
+                <label>Período</label>
+                <input class="w3-input w3-round" type="text" name="periodo" placeholder="Por preecher" required/>
+                <label>Data de Nascimento</label>
+                <input class="w3-input w3-round" type="date" name="dataNasc" required/>
+                <label>Data de Óbito</label>
+                <input class="w3-input w3-round" type="date" name="dataObito" required/>
+                <label>Biografia</label>
+                <input class="w3-input w3-round" type="text" name="bio" placeholder="Por preecher" required/>
             </fieldset>
             <button class="w3-button w3-block w3-grey" type="submit">
                 Guardar

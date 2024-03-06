@@ -1,5 +1,4 @@
-compositores.json
-node_modules
+db
 public
-*.json
-README.md
+node_modules
+package-lock.json

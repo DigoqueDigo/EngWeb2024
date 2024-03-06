@@ -15,14 +15,16 @@ class ServerHandler{
             'GET': {
                 '/': () => this.showInitialPage(),
                 '/periodos': () => this.showPeriodos(),
-                '/periodos/P': () => this.showArtistasPeriodo(),
+                '/periodos/periodo': () => this.showCompositoresPeriodo(),
                 '/compositores': () => this.showCompositores(),
-                '/compositores/C': () => this.showCompositor(),
+                '/compositores/profile': () => this.showCompositor(),
                 '/compositores/edit': () => this.editCompositor(),
-                '/compositores/delete': () => this.deleteCompositor()
+                '/compositores/delete': () => this.deleteCompositor(),
+                '/compositores/create': () => this.createCompositor()
             },
             'POST': {
-                '/compositores/edit': () => this.updateCompositor()
+                '/compositores/edit': () => this.updateCompositor(),
+                '/compositores/create': () => this.saveCompositor()
             }
         }
     }
@@ -31,10 +33,10 @@ class ServerHandler{
     execute(pathname){
         try{
             this.pathname = pathname
-            pathname = pathname.replace(/periodos\/.*/,'periodos/P')
-            pathname = pathname.replace(/compositores\/C.*/,'compositores/C')
+            pathname = pathname.replace(/periodos\/.*/,'periodos/periodo')
             pathname = pathname.replace(/compositores\/edit\/\w.*/,'compositores/edit')
             pathname = pathname.replace(/compositores\/delete\/\w*/,'compositores/delete')
+            pathname = pathname.replace(/compositores\/((?!delete|create|edit).)*$/,'compositores/profile')
             this.functions[this.req.method][pathname]()
         }
         catch (error) {
@@ -91,7 +93,7 @@ class ServerHandler{
     }
 
 
-    showArtistasPeriodo(){
+    showCompositoresPeriodo(){
         let self = this
         let periodo = self.pathname.split('/').pop()
         axios.get('http://localhost:3000/compositores?periodo=' + periodo)
@@ -131,7 +133,7 @@ class ServerHandler{
 
     updateCompositor(){
         let self = this
-        self.collectRequestBodyData(self.req, result => {            
+        self.collectRequestBodyData(self.req, result => {
             axios.put('http://localhost:3000/compositores/' + this.pathname.split('/').pop(), result)
                 .then(async (resp) => {
                     let compositores = await axios.get('http://localhost:3000/compositores/')
@@ -154,6 +156,27 @@ class ServerHandler{
         }
 
         else callback(null);
+    }
+
+
+    createCompositor(){
+        this.res.end(this.template.createCompositor())
+    }
+
+
+    saveCompositor(){
+        let self = this
+        self.collectRequestBodyData(self.req, result => {
+            axios.post('http://localhost:3000/compositores/', result)
+                .then(async (resp) => {
+                    let compositores = await axios.get('http://localhost:3000/compositores')
+                    self.res.end(self.template.compositoresPage('Lista de Compositores',compositores.data,'/'))
+                })
+                .catch(function (error){
+                    console.log(error)
+                    self.showErrorPage()
+                })
+        })
     }
 }
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <title>TPC4: Classical Composers Website</title>
+        <date>2024-03-06</date>
+        <author>
+            <id>A100897</id>
+            <name>Diogo Marques</name>
+        </author>
+        <uc>
+            <sigla>EW2024</sigla>
+            <name>Engenharia Web</name>
+        </uc>
+    </meta>
+    <resumo>
+        <p>
+            Este trabalho consiste em criar um website para um arquivo
+            de compositores, sendo que as informações necessárias estão
+            contidas num ficheiro .json, que pode ser consultado
+            recorrendo à *REST API* do json-server.
+        </p>
+    </resumo>
+    <objetivos>
+        <objetivo>Apresentar uma listagem dos compositores e períodos.</objetivo>
+        <objetivo>Analisar detalhadamente os elementos mencionados.</objetivo>
+        <objetivo>Proporcionar uma navegação intuitiva.</objetivo>
+    </objetivos>
+    <operacoes>
+        <operacao>Adicionar/Remover compositores.</operacao>
+        <operacao>Editar as informações dos compositores.</operacao>
+    </operacoes>
+    <paginas>
+        <pagina>Página inicial: /</pagina>
+        <pagina>Página dos períodos: /periodos</pagina>
+        <pagina>Página dos compositores: /compositores</pagina>
+        <pagina>Página de um período: /periodos/periodo</pagina>
+        <pagina>Página de um compositor: /compositores/compositor</pagina>
+    </paginas>
+</doc>

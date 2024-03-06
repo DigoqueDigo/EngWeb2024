@@ -16,7 +16,7 @@
         <p>Este trabalho consiste em criar um website para um arquivo
         de filmes americanos, sendo que as informações necessárias
         estão contidas num ficheiro .json, que pode ser consultado
-        recorrendo à REST API do `json-server`.</p>
+        recorrendo à REST API do json-server.</p>
     </resumo>
     <objetivos>
         <objetivo>Apresentar uma listagem dos filmes, atores e géneros.</objetivo>
