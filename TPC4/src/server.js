@@ -9,7 +9,7 @@ const server = http.createServer((req,res) => {
     console.log(pathname)
     if (/\.ico|\.css|\.svg/.test(pathname))
         new StaticHandler(req,res).execute(pathname)
-    else new ServerHandler(res,res).execute(pathname)
+    else new ServerHandler(req,res).execute(pathname)
 })
 
 

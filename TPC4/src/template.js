@@ -51,7 +51,7 @@ class Template{
         </div>
         <a href="/periodos" style="text-decoration: none;">
             <button class="w3-button w3-block w3-sand w3-padding-large">
-                <h3>Periodos</h3>
+                <h3>Períodos</h3>
             </button>
         <a href="/compositores" style="text-decoration: none;">
             <button class="w3-button w3-block w3-sand w3-padding-large">
@@ -106,14 +106,18 @@ class Template{
                         </a>
                     </td>
                     <td>
-                        <button class="w3-button w3-circle w3-grey">
-                            <img src="pencil-fill.svg">
-                        </button>
+                        <a href="/compositores/edit/${compositor.id}">
+                            <button class="w3-button w3-circle w3-grey">
+                                <img src="pencil-fill.svg">
+                            </button>
+                        </a>
                     </td>
                     <td>
-                        <button class="w3-button w3-circle w3-grey">
-                            <img src="trash3-fill.svg">
-                        </button>
+                        <a href="/compositores/delete/${compositor.id}">
+                            <button class="w3-button w3-circle w3-grey">
+                                <img src="trash3-fill.svg">
+                            </button>
+                        </a>
                     </td>
                 </tr>`
         });
@@ -245,6 +249,46 @@ class Template{
 </html>`
         return text
 
+    }
+
+    editCompositor(compositor){
+        return `
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="favicon.ico"/>
+        <link rel="stylesheet" href="w3.css"/>
+        <title>Editar - ${compositor.id}</title>
+    </head>
+    <body>
+       <div class="w3-card-4">
+            <header class="w3-container w3-teal">
+                <h1>${compositor.nome}</h1>
+            </header>
+        </div>
+        <form class="w3-container" method="POST">
+            <fieldset>
+                <label>Nome</label>
+                <input class="w3-input w3-round" type="text" name="nome" value="${compositor.nome}"/>
+                <label>Período</label>
+                <input class="w3-input w3-round" type="text" name="periodo" value="${compositor.periodo}"/>
+                <label>Data de Nascimento</label>
+                <input class="w3-input w3-round" type="date" name="dataNasc"value="${compositor.dataNasc}"/>
+                <label>Data de Óbito</label>
+                <input class="w3-input w3-round" type="date" name="dataObito" value="${compositor.dataObito}"/>
+                <label>Biografia</label>
+                <input class="w3-input w3-round" type="text" name="bio" value="${compositor.bio}"/>
+            </fieldset>
+            <button class="w3-button w3-block w3-grey" type="submit">
+                Guardar
+            </button>
+        </form>
+        <footer class="w3-container w3-teal">
+            <h5>Criado por Diogo Marques</h5>
+        </footer>
+    </body>
+</html>`
     }
 }
 

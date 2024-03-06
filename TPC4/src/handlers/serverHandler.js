@@ -1,20 +1,29 @@
 import axios from 'axios'
+import querystring from 'querystring'
 import Template from "../template.js"
+
 
 class ServerHandler{
 
 
     constructor(req,res){
-        this.res = req
+        this.req = req
         this.res = res
         this.pathname = ''
         this.template = new Template()
         this.functions = {
-            '/': () => this.showInitialPage(),
-            '/compositores': () => this.showCompositores(),
-            '/compositores/C' : () => this.showCompositor(),
-            '/periodos': () => this.showPeriodos(),
-            '/periodos/P': () => this.showArtistasPeriodo()
+            'GET': {
+                '/': () => this.showInitialPage(),
+                '/periodos': () => this.showPeriodos(),
+                '/periodos/P': () => this.showArtistasPeriodo(),
+                '/compositores': () => this.showCompositores(),
+                '/compositores/C': () => this.showCompositor(),
+                '/compositores/edit': () => this.editCompositor(),
+                '/compositores/delete': () => this.deleteCompositor()
+            },
+            'POST': {
+                '/compositores/edit': () => this.updateCompositor()
+            }
         }
     }
 
@@ -22,11 +31,15 @@ class ServerHandler{
     execute(pathname){
         try{
             this.pathname = pathname
-            pathname = pathname.replace(/compositores\/C.*/,'compositores/C')
             pathname = pathname.replace(/periodos\/.*/,'periodos/P')
-            this.functions[pathname]()
+            pathname = pathname.replace(/compositores\/C.*/,'compositores/C')
+            pathname = pathname.replace(/compositores\/edit\/\w.*/,'compositores/edit')
+            pathname = pathname.replace(/compositores\/delete\/\w*/,'compositores/delete')
+            this.functions[this.req.method][pathname]()
         }
-        catch (error) {this.showErrorPage()}
+        catch (error) {
+            console.error(error)
+            this.showErrorPage()}
     }
 
 
@@ -88,6 +101,59 @@ class ServerHandler{
                 console.error(error)
                 self.showErrorPage()
             })
+    }
+
+
+    editCompositor(){
+        let self = this
+        axios.get('http://localhost:3000/compositores/' + self.pathname.split('/').pop())
+            .then((resp) => self.res.end(self.template.editCompositor(resp.data)))
+            .catch(function (error){
+                console.error(error)
+                self.showErrorPage()
+            })
+    }
+
+
+    deleteCompositor(){
+        let self = this
+        axios.delete('http://localhost:3000/compositores/' + self.pathname.split('/').pop())
+            .then(async (resp) => {
+                let compositores = await axios.get('http://localhost:3000/compositores/')
+                self.res.end(self.template.compositoresPage('Lista de Compositores',compositores.data,'/'))
+            })
+            .catch(function (error){
+                console.error(error)
+                self.showErrorPage()
+            })
+    }
+
+
+    updateCompositor(){
+        let self = this
+        self.collectRequestBodyData(self.req, result => {            
+            axios.put('http://localhost:3000/compositores/' + this.pathname.split('/').pop(), result)
+                .then(async (resp) => {
+                    let compositores = await axios.get('http://localhost:3000/compositores/')
+                    self.res.end(self.template.compositoresPage('Lista de Compositores',compositores.data,'/'))
+                })
+                .catch(function (error){
+                    console.error(error)
+                    self.showErrorPage()
+                })
+        })
+    }
+
+
+    collectRequestBodyData(request, callback) {
+
+        if(request.headers['content-type'] === 'application/x-www-form-urlencoded') {
+            let body = '';
+            request.on('data', chunk => body += chunk.toString());
+            request.on('end', () => callback(querystring.parse(body)));
+        }
+
+        else callback(null);
     }
 }
 
