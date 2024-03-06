@@ -10,9 +10,11 @@ class ServerHandler{
         this.pathname = ''
         this.template = new Template()
         this.functions = {
-            '/': () => this.showCompositores(),
+            '/': () => this.showInitialPage(),
             '/compositores': () => this.showCompositores(),
-            '/compositores/C' : () => this.showCompositor()
+            '/compositores/C' : () => this.showCompositor(),
+            '/periodos': () => this.showPeriodos(),
+            '/periodos/P': () => this.showArtistasPeriodo()
         }
     }
 
@@ -21,6 +23,7 @@ class ServerHandler{
         try{
             this.pathname = pathname
             pathname = pathname.replace(/compositores\/C.*/,'compositores/C')
+            pathname = pathname.replace(/periodos\/.*/,'periodos/P')
             this.functions[pathname]()
         }
         catch (error) {this.showErrorPage()}
@@ -32,10 +35,16 @@ class ServerHandler{
     }
 
 
+    showInitialPage(){
+        this.res.end(this.template.initialPage())
+    }
+
+
     showCompositores(){
         let self = this
         axios.get('http://localhost:3000/compositores')
-            .then((resp) => self.res.end(self.template.compositoresPage(resp.data)))
+            .then((resp) => self.res.end(self.template.compositoresPage(
+                'Lista de Compositores',resp.data,'/')))
             .catch(function (error){
                 console.error(error)
                 self.showErrorPage()
@@ -47,6 +56,34 @@ class ServerHandler{
         let self = this
         axios.get('http://localhost:3000/compositores/' + self.pathname.split('/').pop())
             .then((resp) => self.res.end(self.template.compositorPage(resp.data)))
+            .catch(function (error){
+                console.error(error)
+                self.showErrorPage()
+            })
+    }
+
+
+    showPeriodos(){
+        let self = this
+        axios.get('http://localhost:3000/compositores')
+        .then((resp) => {
+            let periodos = new Set()
+            resp.data.forEach(element => periodos.add(element.periodo));
+            self.res.end(self.template.periodosPage(periodos))
+        })
+        .catch(function (error){
+            console.error(error)
+            self.showErrorPage()
+        })
+    }
+
+
+    showArtistasPeriodo(){
+        let self = this
+        let periodo = self.pathname.split('/').pop()
+        axios.get('http://localhost:3000/compositores?periodo=' + periodo)
+            .then((resp) => self.res.end(self.template.compositoresPage(
+                'Lista de Compositores - '+periodo,resp.data,'/periodos')))
             .catch(function (error){
                 console.error(error)
                 self.showErrorPage()

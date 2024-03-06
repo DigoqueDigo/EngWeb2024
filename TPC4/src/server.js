@@ -7,7 +7,7 @@ import ServerHandler from './handlers/serverHandler.js'
 const server = http.createServer((req,res) => {
     let pathname = url.parse(req.url,true).pathname
     console.log(pathname)
-    if (pathname.includes('favicon') || pathname.includes('w3.css'))
+    if (/\.ico|\.css|\.svg/.test(pathname))
         new StaticHandler(req,res).execute(pathname)
     else new ServerHandler(res,res).execute(pathname)
 })
