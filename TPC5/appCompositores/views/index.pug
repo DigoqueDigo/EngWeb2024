@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .w3-card-4
+
+        header.w3-container.w3-teal
+            h1= title
+
+        a(href=indexLink1, style="text-decoration: none;")
+            button.w3-button.w3-block.w3-sand.w3-padding-large
+                h3= indexElement1
+
+        a(href=indexLink2, style="text-decoration: none;")
+            button.w3-button.w3-block.w3-sand.w3-padding-large
+                h3= indexElement2
+
+        footer.w3-container.w3-teal
+            h5 Criado por Diogo Marques #{data}

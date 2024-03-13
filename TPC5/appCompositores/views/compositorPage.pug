@@ -1,0 +1,38 @@
+extends layout
+
+block content
+
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1= compositor.nome
+
+    .w3-light-grey(style="padding-left: 15px;")
+        h3(style="padding-top: 10px;")
+            | Período
+        p(style="text-align: justify; font-size: 17px; padding-bottom: 10px;")
+            | #{compositor.periodo}
+
+    .w3-light-grey(style="padding-left: 15px;")
+        h3(style="padding-top: 10px;")
+            | Data de Nascimento
+        p(style="text-align: justify; font-size: 17px; padding-bottom: 10px;")
+            | #{compositor.dataNasc}
+
+    .w3-light-grey(style="padding-left: 15px;")
+        h3(style="padding-top: 10px;")
+            | Data de Falecimento
+        p(style="text-align: justify; font-size: 17px; padding-bottom: 10px;")
+            | #{compositor.dataObito}
+
+    .w3-light-grey(style="padding-left: 15px; padding-right: 15px;")
+        h3(style="padding-top: 10px;")
+            | Biografia
+        p(style="text-align: justify; font-size: 17px; padding-bottom: 10px;")
+            | #{compositor.bio}
+
+    a(href=voltar , style="text-decoration: none;")
+        button.w3-button.w3-block.w3-grey
+            | Volar
+
+    footer.w3-container.w3-teal
+        h5 Criado por Diogo Marques #{data}
