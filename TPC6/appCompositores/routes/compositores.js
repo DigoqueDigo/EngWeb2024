@@ -31,7 +31,7 @@ router.get('/create', function(req, res, next){
 
 router.post('/create', function(req, res, next){
     Compositor.insert(req.body)
-        .then(() => res.status(201).redirect('/compositores'))
+        .then(() => {res.status(201).redirect('/compositores')})
         .catch(error => res.status(504).render('error', {'error': error}))
 })
 
@@ -78,11 +78,8 @@ router.get('/edit/:idCompositor', function(req, res, next){
 
 
 router.post('/edit/:idCompositor', function(req, res, next){
-    Compositor.update(req.params.id,req.body)
-        .then(() => {
-            console.log(req.body)
-            res.status(201).redirect('/compositores')
-        })
+    Compositor.update(req.params.idCompositor,req.body)
+        .then(() => res.status(201).redirect('/compositores'))
         .catch(error => res.status(508).render('error', {'error': error}))
 })
 

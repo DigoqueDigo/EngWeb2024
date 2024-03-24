@@ -23,7 +23,7 @@ module.exports.insert = (compositor) => {
 
 
 module.exports.update = (id,compositor) => {
-    return Compositor.findOneAndUpdate({_id: new ObjectId(id)},compositor)
+    return Compositor.findOneAndUpdate({_id: new ObjectId(id)},compositor,{new :true})
 }
 
 
