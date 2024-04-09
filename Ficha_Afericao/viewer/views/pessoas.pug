@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1(style="display: flex; justify-content: space-between; align-items: center;")
+                | #{title}
+                a.w3-btn.w3-circle.w3-grey(href="/pessoas/create", style="text-decoration: none;")
+                    img(src="../images/person-fill-add.svg", style="width: 40px;")
+        .w3-container
+            table.w3-table-all
+                tr
+                    th Nome
+                    th Profissão
+                    th Informação
+                    th Editar
+                    th Eliminar
+                each pessoa in pessoas
+                    tr
+                        td= pessoa.nome
+                        td= pessoa.profissao 
+                        td
+                            a(href='/pessoas/' + pessoa['_id'])
+                                button.w3-button.w3-circle.w3-grey
+                                    img(src='../images/info-lg.svg')
+                        td
+                            a(href='/pessoas/edit/' + pessoa['_id'])
+                                button.w3-button.w3-circle.w3-grey
+                                    img(src='../images/pencil-fill.svg')
+                        td 
+                            a(href='/pessoas/delete/' + pessoa['_id'])
+                                button.w3-button.w3-circle.w3-grey
+                                    img(src='../images/trash3-fill.svg')
+
+        a(href= voltar, style="text-decoration: none;")
+            button.w3-button.w3-block.w3-grey
+                | Voltar
+
+        footer.w3-container.w3-teal
+            h5 Criado por Diogo Marques #{data}
